@@ -1,0 +1,266 @@
+/**
+ * poll_manager.txt
+ * Poll Manager Help Text
+ * Version 1.2
+ *
+ * @author  Boudewijn Sjouke <boudewijnsjouke@hotmail.com>
+ * @copyright Copyright 2009/2011
+ * @license http://www.gnu.org/licenses/gpl.txt GNU General Public License V2.0
+ *
+ * If you are satisfied with this add-on and want to express your appreciation in more
+ * than words, please make a small donation with PayPal, to the emailaddress 
+ * mentioned above. Thank you!
+ *
+ */
+
+SUMMARY
+========
+
+This sidebox presents a mini poll to the customer, one question, up to six options, single or multiple choice. 
+If defined, the customer can also enter his own option text as his vote. 
+After submitting the vote, the customer will see the poll results so far in the sidebox.
+The customer can also click a link in the sidebox to display the results of all polls so far (if enabled
+by the shop owner).
+From the administrative interface, the shop owner can define and maintain multiple polls, and view the vote results.
+
+
+LIMITATIONS
+===========
+
+- There are no limitations to the number of polls that can be defined and/or active simultaneously.
+- Each poll can only have six options.
+- Each poll can only have one text input field for a custom vote input.
+- This package has been tested on Windows Server2003 with IIS6.0 and PHP 5.2/5.3, 
+  with Zen-Cart version 1.3.9h and version 1.5.0beta
+
+
+IMPACT ON EXISTING INSTALLATION
+===============================
+
+Poll Manager uses it's own database tables, which are created with the install.sql script. 
+A second script is provided to remove these tables again.
+No existing scripts are changed, but please check if any existing buttons might be overwritten with the ones in the package.
+
+
+POLL DESCRIPTION
+================
+
+A poll has the following attributes:
+- Poll description      : The title of the poll. This is only visible to the admin.
+- Poll question         : The question that will appear to the customer, in the poll sidebox.
+- Poll type             : Single choice (customer can select only one option) or multiple choice (customer can select
+                          more than one option).
+- Poll multivote        : The customer can vote for the same poll multiple times or only once
+- Poll primary	        : One poll can be primary and will be presented first to new visitors
+- Poll status           : Active (poll will be presented to the customers) or Inactive (poll will only appear in the
+                          administrative interface).
+- Poll on overview page : If the results for this poll should be shown on the overview page
+- Poll options          : The options the customer can vote on. Each poll has at least two options defined.
+
+A poll option has the following attributes:
+- Option number         : This is automatically assigned by PM.
+- Text input            : If selected, the customer will see a text input field below the option choice text. 
+                          Only one option can have such an input field.
+- Option text           : The text that will be presented to the customer for this option.
+- Option votes          : The number of times this option was voted on.
+- Customer texts        : The texts that customers have entered (only if text input was selected for the option).
+
+
+FUNCTIONS
+=========
+
+Basically, Poll Manager has three main functions:
+
+1. A Poll sidebox, which can be added to your shop with the normal administrative functions (Tools -> Layout Boxes Controller)
+The customer will be presented a randomly chosen active poll. However, PM will avoid to display the same poll twice 
+subsequently, that is if more than one active poll can be presented to the customer.
+After choosing one (or more, depending on the poll type) option,
+the customer clicks the Vote button. The poll sidebox will then refresh and show the poll results so far.
+A user (actually an IP address) will not be presented a poll again, on which he already voted, unless the multivote option
+for this poll is activated by the shop owner.
+Various checks are done before the vote is actually submitted. The vote button will only become active if (at least) one 
+option is selected. A selected but empty input text fields will be deselected before submit.
+
+2. A poll overview page, on which the customer can select a poll from a dropdown menu, to see the results recorded so far.
+Only polls for which the administrator has indicated that the results can be shown here, will appear.
+The dropdown list is not displayed if only one poll is available for display.
+The link to the overview page is in the poll box, and the current poll is displayed by default.
+Through the 'Edit Page' option in the administrative interface of Zen-Cart, the administrator can add text, pictures or
+whatever to the bottom of the page. Also the layout can be tailored with specific CSS-classes (see below).
+
+3. An administrative interface to define, alter and delete the polls, and view the poll results.
+Some remarks on the various admin functions:
+
+For testing purposes, the votes done from the current admin's IP can be deleted from a poll.
+A button will show up if this is applicable.
+
+All votes from a specific poll can be removed. A button will show up if this is applicable.
+
+Be careful with making changes to an existing poll. If the content of the options is changed, the votes for the old content 
+still exist and will make the poll results unreliable. Nevertheless PM will allow editing existing polls, to give the 
+ability to remove typo's etc.
+
+If an option is defined as Text input, the entered texts can be made visible by clicking the respective option text, which 
+appears as a link.
+If no input is given yet, the option text is just text, no link.
+
+
+LAYOUT ISSUES
+=============
+
+Many shop-templates use their own stylesheet, with styles defined different from standard Zen-Cart.
+Because of this, texts in the poll sidebox may not be displayed in the correct layout.
+In the file includes/templates/<YOUR TEMPLATE>/css/style_pollmanager.css, all styles that are used in the poll sidebox 
+(poll options and poll results) can be modidfied as needed. The layout is completely stylesheet-driven.
+
+For the overview page, the following styles are defined in the page code, and can be used in your stylesheet
+to change the appearance of the page:
+
+#Poll_overview for the entire page
+#Poll_overviewHeading for the page title 
+.pollResults for each entire block of question and options/results
+.pollResultsOption for each option/result 
+
+
+INSTALLATION
+============
+
+1. Unzip the package anywhere.
+2. Zen-Cart 1.5 ONLY: Remove the folder admin/includes/boxes/extra_boxes
+3. Change the folder name 'admin' to the appropriate one for your website.
+4. Change the folder name 'YOUR TEMPLATE' to the folder name of the template you have in use.
+5. From the admin interface, Tools -> Install SQL Patches, run the file install_zc_1.3.sql or install_zc_1.5.sql,
+   depending on the version of Zencart that you have in use.
+   Either copy the content in the window, or upload the file.
+6. Check if any buttons with the same name already exists in the same folder of your installation.
+   Just by deleting them from the files in the package, you will keep the old buttons.
+7. Copy all files to the root of your installation, 
+   EXCEPT: install_zc_1.3.sql
+           install_zc_1.5.sql
+           uninstall_zc_1.3.sql
+           uninstall_zc_1.5.sql
+           upgrade1.0_to_1.1.sql
+           poll_manager.txt
+           license.txt
+8. That's it. Now you can define your first poll! And don't forget to activate the sidebox!
+
+
+UPGRADING FROM EARLIER VERSIONS
+===============================
+
+1. Follow the installation steps above, EXCEPT for step 5.
+2. If you upgrade from PM 1.0, manually remove the file includes/modules/sideboxes/poll_box.php
+3. If you upgrade from PM 1.0, run the upgrade1.0_to_1.1.sql patch file from your admin 
+   interface (Tools->Install SQL Patches)
+   
+There is no upgrade script (needed) for the upgrade from PM 1.1 to 1.2.
+
+
+REMOVING POLL MANAGER
+=====================
+
+You can remove Poll Manager with the following steps:
+1. Remove the sidebox from the page definition (Tools -> Layout Boxes Controller)
+2. Run the uninstall script, provided with the package (Tools -> Install SQL Patches)
+3. Delete the files that are mentioned below
+4. In the admin interface, go to: Tools -> Layout Boxes Controller. The poll box may still be present
+   there, with a warning that it's missing. Also you will get the option to remove the poll box. After 
+   selecting this, the poll box will be removed from the list.
+
+
+FILES
+=====
+
+The package contains the following files:
+- install_zc_1.3.sql
+- install_zc_1.5.sql
+- uninstall_zc_1.3.sql
+- uninstall_zc_1.5.sql
+- upgrade1.0_to_1.1.sql
+- zcrpc.php
+- poll_manager.txt
+- license.txt
+- images/icons/indicator.gif
+- includes/extra_datafiles/poll_box_filenames.php
+- includes/languages/dutch/poll_overview.php
+- includes/languages/dutch/extra_definitions/poll_box.php
+- includes/languages/dutch/html_includes/define_poll_result_page.php
+- includes/languages/english/poll_overview.php
+- includes/languages/english/extra_definitions/poll_box.php
+- includes/languages/english/html_includes/define_poll_result_page.php
+- includes/modules/sideboxes/YOUR_TEMPLATE/poll_box.php
+- includes/modules/pages/poll_overview/header.php
+- includes/templates/YOUR_TEMPLATE/buttons/dutch/vote.gif
+- includes/templates/YOUR_TEMPLATE/buttons/dutch/vote_results.gif
+- includes/templates/YOUR_TEMPLATE/buttons/english/vote.gif
+- includes/templates/YOUR_TEMPLATE/buttons/english/vote_results.gif
+- includes/templates/YOUR_TEMPLATE/css/style_pollmanager.css
+- includes/templates/YOUR_TEMPLATE/images/vote_bar.gif
+- includes/templates/YOUR_TEMPLATE/templates/tpl_poll_overview_default.php
+- includes/templates/YOUR_TEMPLATE/sideboxes/tpl_poll_box.php
+- includes/templates/YOUR_TEMPLATE/sideboxes/tpl_poll_box_result.php
+- admin/poll_manager.php
+- admin/poll_manager.txt
+- admin/images/icons/plus.gif
+- admin/images/icons/minus.gif
+- admin/includes/boxes/extra_boxes/poll_manager_tools_dhtml.php
+- admin/includes/extra_datafiles/poll_manager_filenames.php
+- admin/includes/functions/extra_functions/function_poll_manager.php
+- admin/includes/languages/dutch/extra_definitions/poll_manager.php
+- admin/includes/languages/dutch/images/buttons/button_add_option.gif
+- admin/includes/languages/dutch/images/buttons/button_back.gif
+- admin/includes/languages/dutch/images/buttons/button_del_IP_votes.gif
+- admin/includes/languages/dutch/images/buttons/button_edit.gif
+- admin/includes/languages/dutch/images/buttons/button_remove.gif
+- admin/includes/languages/dutch/images/buttons/button_remove_votes.gif
+- admin/includes/languages/dutch/images/buttons/button_send.gif
+- admin/includes/languages/english/extra_definitions/poll_manager.php
+- admin/includes/languages/english/images/buttons/button_add_option.gif
+- admin/includes/languages/english/images/buttons/button_back.gif
+- admin/includes/languages/english/images/buttons/button_del_IP_votes.gif
+- admin/includes/languages/english/images/buttons/button_edit.gif
+- admin/includes/languages/english/images/buttons/button_remove.gif
+- admin/includes/languages/english/images/buttons/button_remove_votes.gif
+- admin/includes/languages/english/images/buttons/button_send.gif
+
+
+CHANGELOG
+=========
+
+1.2
+- Moved all layout definitions to separate css
+- Added install script for Zen-Cart 1.5
+- Fixed poll box is not resized after vote (IE bug)
+- Fixed language constant PM_NO_POLLS defined in wrong file
+
+1.1
+- Added display of date of first and last vote for each poll in the administrative interface
+- Added multivote option for polls
+- Added poll overview page and option in the administrative interface to display poll results there
+- Added option to display one poll always as first for a new visitor
+- Added avoid displaying the same poll twice subsequently (if more than 1 active poll exists)
+- Added percentage of total votes to poll options in admin interface
+- Moved includes/modules/sideboxes/poll_box.php to includes/modules/sideboxes/YOUR_TEMPLATE/poll_box.php
+- Fixed pollbox width incorrect with small headers
+- Fixed add option 'forgets' checked text input field
+
+1.0
+- Added expandable poll blocks in admin interface
+- Added use of regular message stack for errors in admin interface
+- Fixed poll option renumbering after emptying option(s) in admin interface
+- Fixed empty options disappear after submit of incomplete poll in admin interface
+- Fixed wrong language constants in admin interface
+- Fixed poll manager admin interface doesn't center in FF
+- Fixed wrong number of voters for multiple choice polls in admin interface
+- Added preload of 'loading' image
+- Added configurable poll sidebox layout
+- Moved indicator.gif to images/icons folder
+
+1.0 beta 2
+- Fixed wrong style for sidebox content
+- Fixed layout of admin interface
+- Fixed wrong headers for edit poll in admin interface
+- Added number of voters to multiple choice polls in admin interface
+
+1.0 beta 1
+- Initial version

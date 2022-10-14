@@ -1,0 +1,231 @@
+
+/* ----------------------- BOXES ------------------------- */
+
+.box {margin-bottom:30px;}
+
+.box-head {
+	font-family: 'Vidaloka', serif;
+	font-size:25px;
+	text-decoration:none;
+	line-height:28px;
+	color:#202020;
+	font-weight:normal;
+	margin:0 0 10px 0;
+	text-transform:uppercase;
+}
+.box-head a {
+	color:#202020;
+	text-decoration:none;
+}
+.box-head a:hover {
+	color:#a14921;
+}
+
+.box-body {}
+
+.box-body ul {margin:0; padding:0; list-style:none;}
+.box-body ul li {}
+.box-body ul li a {
+	color:#202020;
+	font-size:13px;
+	line-height:24px;
+	text-transform:uppercase;
+	text-decoration:none;
+	font-family: 'Open Sans', sans-serif;
+}
+.box-body ul li.category-products a:hover,
+.box-body ul li .category-subs-parent-selected,
+.box-body ul li .category-subs-selected,
+.box-body ul li a:hover {
+	color:#ea844c;
+}
+.box-body ul li.category-products a{
+	font-size:9px;
+	font-weight:normal;
+}
+.box-body ol {margin:0; padding:0; list-style:none;}
+.box-body ol li {}
+.box-body ol li a {
+	color:#202020;
+	font-size:13px;
+	line-height:24px;
+	text-transform:uppercase;
+	text-decoration:none;
+	font-family: 'Open Sans', sans-serif;
+}
+.box-body ol li a:hover {
+	color:#ea844c;
+}
+
+
+/* ----------------------- LISTING BOXES ------------------------- */
+
+
+#categories {}
+
+
+#moreinformation {}
+
+
+#information {}
+
+
+#bestsellers {}
+
+
+#ezpages {}
+
+
+#orderhistory {}
+#orderhistory .box-body img {background:#FFFFFF; padding:2px; border:1px solid #AAAAAA; vertical-align:middle; margin:2px 0px 2px 0px;}
+#orderhistory .no-bg{ background:none; padding:0;}
+#orderhistory a{ display:inline;}
+
+
+/* ----------------------- BANNER BOXES ------------------------- */
+
+#bannerbox {}
+
+#bannerbox2 {}
+
+#bannerboxall {}
+
+
+
+/* ----------------------- PRODUCT BOXES ------------------------- */
+
+#featured a img, 
+#whatsnew a img, 
+#specials a img, 
+#reviews a img, 
+#manufacturerinfo img, 
+#productnotifications img {margin:0 0 8px;}
+
+#reviews img {margin:5px 0 0;}
+
+
+
+#featured {}
+#featured .box-body{ text-align:center;}
+#featured .box-body .normalprice {
+	font-family: 'Vidaloka', serif;
+	font-size:20px;
+	line-height:33px;
+	color:#3a3a3a;
+	font-weight:normal;
+	background:url(../images/line-price.png) no-repeat 50% 50%;
+}
+#featured .box-body .productSpecialPrice, .productSalePrice, .productSpecialPriceSale {
+	font-family: 'Vidaloka', serif;
+	font-size:32px;
+	line-height:33px;
+	color:#f07a45;
+	font-weight:normal;
+}
+
+
+#whatsnew {}
+#whatsnew .box-body{ text-align:center;}
+#whatsnew .box-body .normalprice {
+	font-family: 'Vidaloka', serif;
+	font-size:20px;
+	line-height:33px;
+	color:#3a3a3a;
+	font-weight:normal;
+	background:url(../images/line-price.png) no-repeat 50% 50%;
+}
+#whatsnew .box-body .productSpecialPrice, .productSalePrice, .productSpecialPriceSale {
+	font-family: 'Vidaloka', serif;
+	font-size:32px;
+	line-height:33px;
+	color:#f07a45;
+	font-weight:normal;
+}
+
+
+#specials {}
+
+#specials .box-body .normalprice {
+	font-family: 'Vidaloka', serif;
+	font-size:20px;
+	line-height:33px;
+	color:#3a3a3a;
+	font-weight:normal;
+	background:url(../images/line-price.png) no-repeat 50% 50%;
+}
+#specials .box-body .productSpecialPrice, .productSalePrice, .productSpecialPriceSale {
+	font-family: 'Vidaloka', serif;
+	font-size:32px;
+	line-height:33px;
+	color:#f07a45;
+	font-weight:normal;
+}
+
+
+#reviews {}
+#reviews .box-body{ text-align:center;}
+
+#manufacturerinfo {}
+
+
+#productnotifications {}
+#productnotifications .box-body{ text-align:center;}
+
+
+
+
+/* ----------------------- FORM BOXES ------------------------- */
+
+#search {}
+#search .box-body{ overflow:hidden;}
+#search input{ border:solid 0px; padding:0; background:none; vertical-align:middle; 	float:left;}
+#search .input1{
+	background:#fefefe;
+	border:1px solid #bab9b9;
+	border-right:none;
+	padding:4px 0 5px 5px;
+	width:167px;
+	height:15px;
+	-moz-transition: all 0.4s ease 0s;
+	-webkit-transition: all 0.4s ease 0s;
+	-o-transition: all 0.4s ease 0s;
+}
+
+
+#manufacturers {}
+#manufacturers .box-body {text-align:center;}
+
+
+#currencies {}
+#currencies .box-body {text-align:center;}
+#currencies select{ width:90%;}
+
+#tellafriend {}
+#tellafriend .box-body{ text-align:center;}
+#tellafriend .no-border input{ border:solid 0px; padding:0;}
+
+#recordcompanies {}
+#recordcompanies .box-body {text-align:center;}
+
+
+#musicgenres {}
+#musicgenres .box-body {text-align:center;}
+
+
+
+/* ----------------------- TEXT BOXES ------------------------- */
+
+#languages {}
+#languages .box-body {text-align:center;}
+
+
+#whosonline {}
+#whosonline .box-body {text-align:center;}
+
+
+#documentcategories {}
+
+
+#shoppingcart {}
+#shoppingcart .cart_line {}
+#shoppingcart #cartBoxEmpty {text-align:center;}
